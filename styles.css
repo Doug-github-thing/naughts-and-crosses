@@ -1,3 +1,20 @@
+.board div {
+    box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+    background-color: teal;
+    border: 0vmin solid black;
+    height: 30vmin;
+    width: 30vmin;
+
+    cursor: pointer;
+    padding: 13%;
+    font-family: "Arial";
+    font-size: 10em;
+    user-select: none;
+    text-align: center;
+}
+
+.board div:hover {background-color: aqua;}
+
 body {background-color: black;}
 
 .text {
@@ -21,24 +38,8 @@ body {background-color: black;}
     margin-left: -80vmin;
 }
 
-/* Set parameters for each box */
-.board div {
-    box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
-    background-color: teal;
-    border: 0vmin solid black;
-    height: 30vmin;
-    width: 30vmin;
+.board .selected {background-color: aqua;}
 
-    cursor: pointer;
-    padding: 13%;
-    font-family: "Arial";
-    font-size: 10em;
-    user-select: none;
-    text-align: center;
-}
-
-.board div:hover   {background-color: aqua;}
 .board .top_bottom {border-width: 0vmin 1vmin;}
 .board .left_right {border-width: 1vmin 0vmin;}
 .board .middle     {border-width: 1vmin;}
-.board .selectable {background-color: aquamarine;}

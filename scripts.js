@@ -71,7 +71,7 @@ function checkArr(arr) {
     if(arr[0].innerHTML == arr[1].innerHTML && arr[1].innerHTML == arr[2].innerHTML) {
         document.getElementById('turn').innerHTML = getXValue() + ' wins!';
         for(q = 0; q < 3; q++)
-            arr[q].className = 'selectable';
+            arr[q].className = 'selected';
         endTheGame();
     }
 }
@@ -91,12 +91,21 @@ function switchTurns() {
     counter++;
 }
 
+// freezes mouseover animations
 function endTheGame() {
     document.getElementById('phase').innerHTML = "Game ogre";
     if(document.getElementById('turn').innerHTML[2] != 'w')
         // if no one wins, change text
         document.getElementById('turn').innerHTML = "Thanks for playing";
     
+    const styleSheet = document.styleSheets[0];
+    const len = styleSheet.length;
+
+    const newHoverRule = ".board div:hover {cursor: default; background-color: teal !important;}";
+    const newHoverRuleSelected = ".board .selected:hover {background-color: aqua !important;}";
+    styleSheet.insertRule(newHoverRule, len);
+    styleSheet.insertRule(newHoverRuleSelected, len + 1);
+
     phase = 'endgame';
 }
 
