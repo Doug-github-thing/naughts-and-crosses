@@ -24,13 +24,15 @@ body {background-color: black;}
     color: beige;
     padding-top: 5%;
     top: 50%;
-    left: 60%;
+    left: 60%; 
 }
 
 .board {
     display: grid;
     grid-template-columns: repeat(3, 30vmin);
 
+    /* padding-left: 100vmin;
+    padding-top: 49vmin; */ 
     position: fixed;
     top: 50%;
     left: 50%;
@@ -39,6 +41,8 @@ body {background-color: black;}
 }
 
 .board .selected {background-color: aqua;}
+.board .open     {background-color: aquamarine;}
+.board .closed   {background-color: teal;} 
 
 .board .top_bottom {border-width: 0vmin 1vmin;}
 .board .left_right {border-width: 1vmin 0vmin;}
