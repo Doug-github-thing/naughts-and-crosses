@@ -82,10 +82,25 @@ let lastCoords = '00';
 // Each turn in move phase involves 2 clicks, one to select which piece to move, and where to move it 
 function makeMove(coords) {
 
+    const clickedBox = document.getElementById(coords);
+    // to allow for changing your mind on which piece to move, check if you've clicked one of your pieces, clean up all
+    // open spaces before searching for new spaces
+    if (clickedBox.innerHTML == getXValue()) {
+        let abort = false;
+        if (clickedBox.className == 'selected')
+            abort = true;
+        
+        cleanUpOpenBoxes();
+        counter = 0;
+
+        if (abort)
+            return;
+    }
+
     // if counter % 2 checks if this is first or second click of the turn
     if (counter % 2 == 0) {
 
-        if (document.getElementById(coords).innerHTML == getXValue()) {
+        if (clickedBox.innerHTML == getXValue()) {
             // array of open squares in movement phase
             let arr = [0, 0, 0];
 
@@ -110,6 +125,7 @@ function makeMove(coords) {
                 // 4 5 6
                 if (diff(thisSum, sum(this_box.id)) == 1)
                     if (coords[0] == this_box.id[0] || coords[1] == this_box.id[1]) {
+                        clickedBox.className = 'selected';
                         arr[q].className = 'open';
                         lastCoords = coords;
                         foundBox = true;
@@ -125,17 +141,13 @@ function makeMove(coords) {
 
     if (counter % 2 == 1) {
 
-        const newBox = document.getElementById(coords);  
+        const newBox = clickedBox;  
         const oldBox = document.getElementById(lastCoords);
 
         if (newBox.className == 'open') {
+
             // if a valid open space is selected, find all open spaces and close them
-            for (i = 1; i < 4; i++)
-                for (j = 1; j < 4; j++) {
-                    const this_box = document.getElementById(i + '' + j);
-                    if (this_box.className == 'open')
-                        this_box.className = 'closed';
-                }
+            cleanUpOpenBoxes();
 
 
             
@@ -147,7 +159,14 @@ function makeMove(coords) {
             switchTurns();
         }
     }
-
+}
+function cleanUpOpenBoxes() {
+    for (i = 1; i < 4; i++)
+        for (j = 1; j < 4; j++) {
+            const this_box = document.getElementById(i + '' + j);
+            if (this_box.className == 'open' || this_box.className == 'selected')
+                this_box.className = 'closed';
+        }
 }
 
 // iterates the turn counter, switches whose turn it is, changes phase if it's time for that
