@@ -70,7 +70,7 @@ function checkVictory(coords) {
 // given an array of length 3 containing squares, checks if they are all equal to see if game is over. If it is, makes it so
 function checkArr(arr) {
     if (arr[0].innerHTML == arr[1].innerHTML && arr[1].innerHTML == arr[2].innerHTML) {
-        document.getElementById('turn').innerHTML = getXValue() + ' wins!';
+        document.getElementById('turn').innerHTML = getXValue().toUpperCase() + ' wins!';
         for(q = 0; q < 3; q++) {
             addClassToBox(arr[q], 'selected');
             arr[q].className = arr[q].className.replace(' closed', '')
