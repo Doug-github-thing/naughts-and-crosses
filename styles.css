@@ -11,6 +11,10 @@ body {background-color: black;}
     left: 60%;
 }
 
+#reload {
+    cursor: pointer;
+}
+
 .board {
     display: grid;
     grid-template-columns: repeat(3, 30vmin);
