@@ -71,8 +71,10 @@ function checkVictory(coords) {
 function checkArr(arr) {
     if (arr[0].innerHTML == arr[1].innerHTML && arr[1].innerHTML == arr[2].innerHTML) {
         document.getElementById('turn').innerHTML = getXValue() + ' wins!';
-        for(q = 0; q < 3; q++)
-            arr[q].className = 'selected';
+        for(q = 0; q < 3; q++) {
+            addClassToBox(arr[q], 'selected');
+            arr[q].className = arr[q].className.replace(' closed', '')
+        }
         endTheGame();
     }
 }
@@ -87,7 +89,7 @@ function makeMove(coords) {
     // open spaces before searching for new spaces
     if (clickedBox.innerHTML == getXValue()) {
         let abort = false;
-        if (clickedBox.className == 'selected')
+        if (clickedBox.className.includes('selected'))
             abort = true;
         
         cleanUpOpenBoxes();
@@ -125,8 +127,8 @@ function makeMove(coords) {
                 // 4 5 6
                 if (diff(thisSum, sum(this_box.id)) == 1)
                     if (coords[0] == this_box.id[0] || coords[1] == this_box.id[1]) {
-                        clickedBox.className = 'selected';
-                        arr[q].className = 'open';
+                        addClassToBox(clickedBox, 'selected');
+                        addClassToBox(arr[q], 'open');
                         lastCoords = coords;
                         foundBox = true;
                     }
@@ -144,29 +146,20 @@ function makeMove(coords) {
         const newBox = clickedBox;  
         const oldBox = document.getElementById(lastCoords);
 
-        if (newBox.className == 'open') {
+        if (newBox.className.includes('open')) {
 
             // if a valid open space is selected, find all open spaces and close them
             cleanUpOpenBoxes();
-
-
             
             oldBox.innerHTML = '';
             newBox.innerHTML = getXValue();
-            newBox.className = 'closed';
+
+            addClassToBox(newBox, 'closed');
 
             checkVictory(newBox.id);
             switchTurns();
         }
     }
-}
-function cleanUpOpenBoxes() {
-    for (i = 1; i < 4; i++)
-        for (j = 1; j < 4; j++) {
-            const this_box = document.getElementById(i + '' + j);
-            if (this_box.className == 'open' || this_box.className == 'selected')
-                this_box.className = 'closed';
-        }
 }
 
 // iterates the turn counter, switches whose turn it is, changes phase if it's time for that
@@ -180,7 +173,6 @@ function switchTurns() {
         document.getElementById('phase').innerHTML = "Moving phase";
         phase = 'moving';
         counter = 0;
-        // endTheGame();
         return;
     }
     counter++;
@@ -189,10 +181,7 @@ function switchTurns() {
 // freezes mouseover animations
 function endTheGame() {
     document.getElementById('phase').innerHTML = "Game ogre";
-    if (document.getElementById('turn').innerHTML[2] != 'w')
-        // if no one wins, change text
-        document.getElementById('turn').innerHTML = "Thanks for playing";
-    
+      
     const styleSheet = document.styleSheets[0];
     const len = styleSheet.length;
 
@@ -201,10 +190,28 @@ function endTheGame() {
     styleSheet.insertRule(newHoverRule, len);
     styleSheet.insertRule(newHoverRuleSelected, len + 1);
 
+    // make replay button light up when game ends
+    document.getElementById('reload').style.color = 'aqua'; 
+
     phase = 'endgame';
 }
 
 // util functions
+
+function cleanUpOpenBoxes() {
+    for (i = 1; i < 4; i++)
+        for (j = 1; j < 4; j++) {
+            const this_box = document.getElementById(i + '' + j);
+            const classText = this_box.className;
+                this_box.className = classText.replace(' open', '').replace(' closed','').replace(' selected','');
+        }
+}
+
+// given a box element and text indicating what class to add to the element, adds class
+function addClassToBox(box, classText) {
+    if (!box.className.includes(classText))
+        box.className = box.className + ' ' + classText;
+}
 
 // get a string value for who's turn it is
 function getXValue() {

@@ -1,3 +1,28 @@
+body {background-color: black;}
+
+.text div{
+    font-size: xx-large;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    position: relative;
+    color: beige;
+    user-select: none;
+    padding-top: 5%;
+    top: 50%;
+    left: 60%;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 30vmin);
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -45vmin;
+    margin-left: -80vmin;
+}
+
+.board div:hover {background-color: aqua;}
 .board div {
     box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
     background-color: teal;
@@ -13,37 +38,9 @@
     text-align: center;
 }
 
-.board div:hover {background-color: aqua;}
-
-body {background-color: black;}
-
-.text {
-    font-size: xx-large;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    position: relative;
-    color: beige;
-    padding-top: 5%;
-    top: 50%;
-    left: 60%; 
-}
-
-.board {
-    display: grid;
-    grid-template-columns: repeat(3, 30vmin);
-
-    /* padding-left: 100vmin;
-    padding-top: 49vmin; */ 
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-top: -45vmin;
-    margin-left: -80vmin;
-}
-
 .board .selected {background-color: aqua;}
 .board .open     {background-color: aquamarine;}
-.board .closed   {background-color: teal;} 
-
+.board .closed   {background-color: teal;}
 .board .top_bottom {border-width: 0vmin 1vmin;}
 .board .left_right {border-width: 1vmin 0vmin;}
 .board .middle     {border-width: 1vmin;}
