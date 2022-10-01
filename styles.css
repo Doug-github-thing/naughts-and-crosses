@@ -1,18 +1,14 @@
 body {background-color: black;}
 
-.text div{
-    font-size: xx-large;
+.text {
+    color: beige;
+    font-size: 6vmin;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     position: relative;
-    color: beige;
     user-select: none;
-    padding-top: 5%;
-    top: 50%;
+    top: 10%;
     left: 60%;
-}
-
-#reload {
-    cursor: pointer;
+    padding-top: 4vmin;
 }
 
 .board {
@@ -26,6 +22,10 @@ body {background-color: black;}
     margin-left: -80vmin;
 }
 
+#reload {
+    cursor: pointer;
+}
+
 .board div:hover {background-color: aqua;}
 .board div {
     box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
@@ -35,9 +35,8 @@ body {background-color: black;}
     width: 30vmin;
 
     cursor: pointer;
-    padding: 13%;
-    font-family: "Arial";
-    font-size: 10em;
+    font-family: "fantasy";
+    font-size: 23vmin;
     user-select: none;
     text-align: center;
 }

@@ -168,7 +168,7 @@ function switchTurns() {
         return;
 
     x = x ? false : true;
-    document.getElementById('turn').innerHTML = getXValue() + "'s turn!";
+    document.getElementById('turn').innerHTML = getXValue().toUpperCase() + "'s turn!";
     if (phase == 'placing' && counter == turnMax) {
         document.getElementById('phase').innerHTML = "Moving phase";
         phase = 'moving';
